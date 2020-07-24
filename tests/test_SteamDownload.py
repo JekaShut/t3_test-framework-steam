@@ -1,6 +1,6 @@
 from framework import framework
 from Common import jsonGetter
-from Utils import LinkOperations, ButtonOperations, StopBrowser, DownloadFile, WaitClass
+from Utils import LinkOperations, ButtonOperations, StopBrowser, DownloadFile, Wait
 
 
 
@@ -11,7 +11,7 @@ class TestSteamDownload:
         framework.RunBrowser(jsonGetter.GetJson.actualBrowser)
         LinkOperations.OpenLink(jsonGetter.GetJson.SITE)
         ButtonOperations.ClickButtonClass("header_installsteam_btn_content")
-        WaitClass.Wait("about_install", 10)
+        Wait.WaitClass("about_install", 10)
 
 
     def test_steamdownload(self):
