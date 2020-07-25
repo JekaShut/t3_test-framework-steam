@@ -11,13 +11,21 @@ BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
 
 class ChromeBrowser():
     def runBrowser(self):
-        driver = webdriver.Chrome(ChromeDriverManager().install())
+        DIR = jsonGetter.GetJson.get("DIR")
+        preferences = {"download.default_directory": DIR, "safebrowsing.enabled": "false"}
+
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("prefs", preferences)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+        driver.maximize_window()
         return(driver)
 
 
 class FireFoxBrowser():
     def runBrowser(self):
+        #preferences = {"browser.download.dir": "D:\[A1QA]\TEMP", "safebrowsing.enabled": "false"}
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        driver.maximize_window()
         return(driver)
 
 
@@ -52,7 +60,7 @@ class BrowserFactory(metaclass=Singleton):
 
 class RunBrowser(metaclass=Singleton):
     def __init__(self, actualBrowser="ChromeBrowser"):
-        actualBrowser = jsonGetter.GetJson().actualBrowser
+        actualBrowser = jsonGetter.GetJson.get("actualBrowser")
         if actualBrowser in BROWSERS:
             BROWSERindex = BROWSERS.index(actualBrowser)
             self.driver = BrowserFactory.getBrowser(BROWSERindex)

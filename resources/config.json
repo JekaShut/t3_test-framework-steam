@@ -1,4 +1,5 @@
 {
     "actualBrowser" : "ChromeBrowser",
-    "SITE" : "https://store.steampowered.com/"
+    "SITE" : "https://store.steampowered.com/",
+    "DIR" : "D:\\[A1QA]\\TEMP"
 }

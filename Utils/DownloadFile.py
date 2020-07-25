@@ -1,7 +1,6 @@
 from framework.framework import *
+from selenium import webdriver
 
 class DownloadFile:
     def __init__(self):
-        self.preferences = {"download.default_directory": "/"}
-        self.options = driver.ChromeOptions()
-        self.options.add_experemental_option
+        pass

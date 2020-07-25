@@ -8,8 +8,8 @@ from Utils import LinkOperations, ButtonOperations, StopBrowser, DownloadFile, W
 class TestSteamDownload:
 
     def test_steampageload(self):
-        framework.RunBrowser(jsonGetter.GetJson.actualBrowser)
-        LinkOperations.OpenLink(jsonGetter.GetJson.SITE)
+        framework.RunBrowser(jsonGetter.GetJson.get("actualBrowser"))
+        LinkOperations.OpenLink(jsonGetter.GetJson.get("SITE"))
         ButtonOperations.ClickButtonClass("header_installsteam_btn_content")
         Wait.WaitClass("about_install", 10)
 
