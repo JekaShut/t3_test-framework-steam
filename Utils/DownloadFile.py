@@ -1,4 +1,4 @@
-from framework.framework import driver
+from framework.framework import *
 
 class DownloadFile:
     def __init__(self):

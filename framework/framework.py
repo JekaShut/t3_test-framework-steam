@@ -1,9 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-import json
+from webdriver_manager.chrome import ChromeDriverManager
+from Common import jsonGetter
 
 
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
@@ -34,18 +34,17 @@ class BrowserFactory(metaclass=Singleton):
     def getBrowser(browsertype):
         
         try:
-            if browsertype == BROWSERS[BROWSERS.index(browsertype)]:
-                
-                driver = ChromeBrowser().runBrowser()
-                # driver.set_window_size(get.resolutionH, get.resolutionW)
-                # driver.maximize_window()
-                
-                return(driver)
-            if browsertype == BROWSERS[BROWSERS.index(browsertype)]:
+            if browsertype == BROWSERS.index("FireFoxBrowser"):
                 driver = FireFoxBrowser().runBrowser()
                 # driver.set_window_size(get.resolutionH, get.resolutionW)
                 # driver.maximize_window()
                 return(driver)
+            elif browsertype == BROWSERS.index("ChromeBrowser"):
+                driver = ChromeBrowser().runBrowser()
+                # driver.set_window_size(get.resolutionH, get.resolutionW)
+                # driver.maximize_window()
+
+                return (driver)
             raise AssertionError("Browser not found")
         except AssertionError as _e:
             print(_e)
@@ -53,12 +52,13 @@ class BrowserFactory(metaclass=Singleton):
 
 class RunBrowser(metaclass=Singleton):
     def __init__(self, actualBrowser="ChromeBrowser"):
-        
+        actualBrowser = jsonGetter.GetJson().actualBrowser
         if actualBrowser in BROWSERS:
             BROWSERindex = BROWSERS.index(actualBrowser)
+            self.driver = BrowserFactory.getBrowser(BROWSERindex)
         else:
             raise Exception("Такого браузера нет!")
-        self.driver = BrowserFactory.getBrowser(BROWSERS[BROWSERindex])
+
 
 
 driver = RunBrowser().driver
