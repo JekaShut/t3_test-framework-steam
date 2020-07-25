@@ -1,6 +1,7 @@
 from framework import framework
 from Common import jsonGetter
-from Utils import LinkOperations, ButtonOperations, StopBrowser, DownloadFile, Wait
+from Utils import LinkOperations, ButtonOperations, StopBrowser, Wait
+import time
 
 
 
@@ -18,6 +19,7 @@ class TestSteamDownload:
         ButtonOperations.ClickButtonClass("about_install")
 
 
-# class TestStopTests:
-#     def test_TearDown(self):
-#         StopBrowser.stop()
+class TestStopTests:
+    def test_TearDown(self):
+        time.sleep(2)
+        StopBrowser.stop()

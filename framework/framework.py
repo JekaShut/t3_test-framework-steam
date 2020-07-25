@@ -23,8 +23,15 @@ class ChromeBrowser():
 
 class FireFoxBrowser():
     def runBrowser(self):
-        #preferences = {"browser.download.dir": "D:\[A1QA]\TEMP", "safebrowsing.enabled": "false"}
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        DIR = jsonGetter.GetJson.get("DIR")
+        fp = webdriver.FirefoxProfile()
+        fp.set_preference("browser.download.folderList", 2)
+        fp.set_preference("browser.download.dir", DIR)
+        fp.set_preference("browser.download.manager.showWhenStarting", False)
+        fp.set_preference("browser.helperApps.alwaysAsk.force", False)
+        fp.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream")
+
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), firefox_profile=fp)
         driver.maximize_window()
         return(driver)
 
