@@ -12,22 +12,23 @@ RussianName = "Русский (Russian)"
 
 class MainPage:
     def __init__(self):
-        self.ButtonClass = "header_installsteam_btn_content"
+        self.WaitTime = 20
+        self.DownloadButtonClass = "header_installsteam_btn_content"
+        self.DropDownXpath = "//*[@id='global_action_menu']/span"
+        self.DropDownMenuButtonsXpath = "//*[@id='global_action_menu']/div/div/a"
+        self.MainLogoXpath = '//div[@id["global_header"]]/div/div[@class["logo"]]/span[@id["logo_holder"]]'
 
     def setLang(self):
-
+        ButtonOperations.ClickButtonXpath(self.DropDownXpath)
         if LOCAL == "en":
-            ButtonOperations.ClickButtonXpath("//*[@id='global_action_menu']/span")
-            ButtonOperations.ClickFromManyByXpathText("//*[@id='global_action_menu']/div/div/a", EnglishName)
-
+            ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, EnglishName)
 
         if LOCAL == "ru":
-            ButtonOperations.ClickButtonXpath("//*[@id='global_action_menu']/span")
-            ButtonOperations.ClickFromManyByXpathText("//*[@id='global_action_menu']/div/div/a", RussianName)
+            ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, RussianName)
 
 
     def clickButtonToDownload(self):
-        Wait.WaitXpath('//div[@id["global_header"]]/div/div[@class["logo"]]/span[@id["logo_holder"]]', 20)
+        Wait.WaitXpath(self.MainLogoXpath, self.WaitTime)
         # Тут долго сидел с wait, не получается сделать ожидание в этом месте, постоянно вылетает ошибка
         #time.sleep(7)
-        ButtonOperations.ClickButtonClass(self.ButtonClass)
+        ButtonOperations.ClickButtonClass(self.DownloadButtonClass)

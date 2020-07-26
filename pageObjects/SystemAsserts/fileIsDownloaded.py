@@ -7,11 +7,12 @@ class fileIsDownloaded:
     def __init__(self):
         self.sleepTime = 2
         self.DIR = jsonGetter.GetJson.get("DIR")
+        self.file = "SteamSetup.exe"
 
     def checkFile(self):
         time.sleep(self.sleepTime)
         directory = os.listdir(self.DIR)
         for file in directory:
-                if file == "SteamSetup.exe":
+                if file == self.file:
                     installed = True
         return(installed)
