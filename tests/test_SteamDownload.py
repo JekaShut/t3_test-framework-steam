@@ -1,22 +1,33 @@
 from framework import framework
-from Common import jsonGetter
-from Utils import LinkOperations, ButtonOperations, StopBrowser, Wait
+from common import jsonGetter
+from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems
 import time
+from pageObjects.pages import DownloadPage, MainPage
+from pageObjects.SystemAsserts import fileIsDownloaded
+
+
+LOCAL = jsonGetter.GetJson.get("LOCAL")
+SITE = jsonGetter.GetJson.get("SITE")
+actualBrowser = jsonGetter.GetJson.get("actualBrowser")
 
 
 
+class TestRunbrowser():
+    def test_runbrowser(self):
+        framework.RunBrowser(actualBrowser)
+        LinkOperations.OpenLink(SITE)
+
+    def test_lang(self):
+        MainPage.MainPage().setLang()
 
 class TestSteamDownload:
 
     def test_steampageload(self):
-        framework.RunBrowser(jsonGetter.GetJson.get("actualBrowser"))
-        LinkOperations.OpenLink(jsonGetter.GetJson.get("SITE"))
-        ButtonOperations.ClickButtonClass("header_installsteam_btn_content")
-        Wait.WaitClass("about_install", 10)
+        MainPage.MainPage().clickButtonToDownload()
+        DownloadPage.DownloadPage().clickButtonToDownload()
 
-
-    def test_steamdownload(self):
-        ButtonOperations.ClickButtonClass("about_install")
+    def test_fileIsDownloaded(self):
+        assert fileIsDownloaded.fileIsDownloaded().checkFile() == True
 
 
 class TestStopTests:

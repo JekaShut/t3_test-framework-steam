@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
-from Common import jsonGetter
+from common import jsonGetter
 
 
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
@@ -16,7 +16,8 @@ class ChromeBrowser():
 
         options = webdriver.ChromeOptions()
         options.add_experimental_option("prefs", preferences)
-        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        driver.set_page_load_timeout(10)
         driver.maximize_window()
         return(driver)
 
