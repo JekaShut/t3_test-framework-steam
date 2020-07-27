@@ -1,0 +1,4 @@
+TODO
+.pytest_cache
+.gitignore
+*.log
