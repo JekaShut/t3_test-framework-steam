@@ -1,4 +1,4 @@
-from framework.framework import *
+from framework.BaseElement import *
 
 
 class GetTextXpath:

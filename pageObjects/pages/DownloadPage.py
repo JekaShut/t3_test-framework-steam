@@ -1,4 +1,4 @@
-from framework import framework
+from framework import BaseElement
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems
 
 

@@ -1,4 +1,4 @@
-from framework import framework
+from framework import BaseElement
 from common import jsonGetter
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems
 import time
@@ -14,7 +14,7 @@ actualBrowser = jsonGetter.GetJson.get("actualBrowser")
 
 class TestRunbrowser():
     def test_runbrowser(self):
-        framework.RunBrowser(actualBrowser)
+        BaseElement.RunBrowser(actualBrowser)
         LinkOperations.OpenLink(SITE)
 
     def test_lang(self):
