@@ -1,5 +1,5 @@
 from framework import BaseElement
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems, GetText, MouseOperations
+from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
 import time
 

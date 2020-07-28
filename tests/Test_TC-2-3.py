@@ -1,6 +1,6 @@
 from framework import BaseElement
 from common import jsonGetter
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems, MouseOperations
+from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, MouseOperations
 import time
 from pageObjects.pages import DownloadPage, MainPage, ActionPage
 from pageObjects.SystemAsserts import fileIsDownloaded
@@ -27,6 +27,7 @@ class TestDiscountCalc:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         ActionPage.ActionPage().navigateToTopSelling()
+        ActionPage.ActionPage().findHigestDiscount()
 
 
 

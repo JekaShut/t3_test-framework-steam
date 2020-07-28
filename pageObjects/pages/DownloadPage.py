@@ -1,5 +1,5 @@
 from framework import BaseElement
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ManyItems
+from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations
 
 
 class DownloadPage:
