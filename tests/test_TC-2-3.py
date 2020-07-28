@@ -2,7 +2,7 @@ from framework import BaseElement
 from common import jsonGetter
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, MouseOperations
 import time
-from pageObjects.pages import DownloadPage, MainPage, ActionPage
+from pageObjects.pages import DownloadPage, MainPage, ActionPage, GamePage
 from pageObjects.SystemAsserts import fileIsDownloaded
 
 from framework.BaseElement import *
@@ -27,7 +27,10 @@ class TestDiscountCalc:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         ActionPage.ActionPage().navigateToTopSelling()
-        ActionPage.ActionPage().findLowestDiscount()
+        gamesPrice = ActionPage.ActionPage().findLowestDiscount()
+        gamePrice = GamePage.GamePage().getPrices()
+        assert gamePrice == gamesPrice + " USD", "Prices are not equal"
+        pass
 
 
 

@@ -17,7 +17,7 @@ class ActionPage:
         self.topSellRowXpath = "//*[@id='TopSellersRows']"
         self.discountXpath = "/a/div/div[@class='discount_pct']"
         self.discountPriceXpath = "../div/div[@class='discount_final_price']"
-        self.discountPriceOnPageXpath = "//div[@class='game_area_purchase_game_wrapper']/div/div/div/div/div/div[@class='discount_final_price']"
+
 
 
 
@@ -30,18 +30,17 @@ class ActionPage:
         ButtonOperations.ClickButtonXpath(self.pageXpath)
         time.sleep(2)
         games = ElementOperations.findManyElements.byXpath(self, self.gamesXpath)
-
         topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
         discountElems = ElementOperations.findManyElements.byClass(self, self.discountClass, topSellRow)
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
         #gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[0][0]).text
         gamesPagePrice = sortedDisc[0][0].find_element_by_xpath(self.discountPriceXpath).text
         sortedDisc[0][0].click()
-        time.sleep(2)
-        gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
-        assert gamePagePrice == gamesPagePrice + " USD"
+        return(gamesPagePrice)
 
-        #вынести страницу игры в отдельный файл
+        #assert gamePagePrice == gamesPagePrice + " USD"
+
+        #добавить ожидания
         #Добавить валюту в зависимости от локализации
         #Сравнить процент, начальную и послескидочную сумму
         #ADD RATED CONTENT BANNER
