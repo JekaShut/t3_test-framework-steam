@@ -10,7 +10,7 @@ class ActionPage:
         self.WaitTime = 10
         self.actionTitleXpath = "//div[1]/div[7]/div[4]/div[1]/div[3]/div[1]/h2"
         self.topSellXpath = "//*[@id='tab_select_TopSellers']/div"
-        self.pageXpath = "//*[@id='TopSellers_links']/span[6]"
+        self.pageXpath = "//*[@id='TopSellers_links']/span[1]"
         self.gamesXpath = "//*[@id='TopSellersRows']/a"
         self.discountClass = "discount_pct"
         self.discountClassBlock = "discount_block"
@@ -22,21 +22,18 @@ class ActionPage:
         Wait.WaitXpath(self.actionTitleXpath, self.WaitTime)
         ButtonOperations.ClickButtonXpath(self.topSellXpath)
 
-    def findHigestDiscount(self):
+    def findLowestDiscount(self):
         Wait.WaitXpath(self.pageXpath, self.WaitTime)
         ButtonOperations.ClickButtonXpath(self.pageXpath)
         time.sleep(2)
         games = ElementOperations.findManyElements.byXpath(self, self.gamesXpath)
         topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
         discountElems = ElementOperations.findManyElements.byClass(self, self.discountClass, topSellRow)
+        sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
+        sortedDisc[0][0].click()
 
-        x = []
-        for elem in discountElems:
-            b = [elem, elem.text]
-            x.append(b)
-        x.sort(key= lambda x: x[1])
+        #ADD RATED CONTENT BANNER
 
-        x[0][0].click()
         pass
 
 

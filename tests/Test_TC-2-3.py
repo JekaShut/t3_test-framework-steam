@@ -27,7 +27,7 @@ class TestDiscountCalc:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         ActionPage.ActionPage().navigateToTopSelling()
-        ActionPage.ActionPage().findHigestDiscount()
+        ActionPage.ActionPage().findLowestDiscount()
 
 
 

@@ -2,17 +2,11 @@ from framework import BaseElement
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
 
-
-class findDiscounts:
-    def byXpath(self, games, Xpath):
-        discounts = []
-        for game in games:
-            try:
-                disc = game.find_element_by_xpath(Xpath)
-                discounts.append(game)
-            except:
-                pass
-        return(discounts)
-
-
-
+class SortDiscountElems:
+    def get(self, discountElems):
+        x = []
+        for elem in discountElems:
+            b = [elem, elem.text]
+            x.append(b)
+        x.sort(key= lambda x: x[1])
+        return(x)
