@@ -6,19 +6,7 @@ from pageObjects.pages import DownloadPage, MainPage
 from pageObjects.SystemAsserts import fileIsDownloaded
 
 
-LOCAL = jsonGetter.GetJson.get("LOCAL")
-SITE = jsonGetter.GetJson.get("SITE")
-actualBrowser = jsonGetter.GetJson.get("actualBrowser")
 
-
-
-class TestRunbrowser():
-    def test_runbrowser(self):
-        BaseElement.RunBrowser(actualBrowser)
-        LinkOperations.OpenLink(SITE)
-
-    def test_lang(self):
-        MainPage.MainPage().setLang()
 
 class TestSteamDownload:
 
@@ -30,7 +18,4 @@ class TestSteamDownload:
         assert fileIsDownloaded.fileIsDownloaded().checkFile() == True
 
 
-class TestStopTests:
-    def test_TearDown(self):
-        time.sleep(2)
-        StopBrowser.stop()
+

@@ -41,6 +41,7 @@ class ActionPage:
         gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
         assert gamePagePrice == gamesPagePrice + " USD"
 
+        #вынести страницу игры в отдельный файл
         #Добавить валюту в зависимости от локализации
         #Сравнить процент, начальную и послескидочную сумму
         #ADD RATED CONTENT BANNER
