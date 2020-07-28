@@ -8,13 +8,6 @@ class findOneByText:
             if elem.text == text:
                 return(elem)
 
-class findOneByClass:
-    def byXpath(self, Xpath):
-        elements = driver.find_elements_by_class_name(Xpath)
-        for elem in elements:
-            if elem.find_element_by_xpath("//*[@class='discount_pct']").text == str:
-                return(elem)
-
 class findManyElements:
     def byXpath(self, Xpath, element=driver):
         elements = element.find_elements_by_xpath(Xpath)
@@ -30,11 +23,9 @@ class findManyElements:
 
 class findOneElement:
     def byXpath(self, Xpath, element=driver):
-        try:
-            element = element.find_element_by_xpath(Xpath)
-            return(element)
-        except:
-            pass
+        element = element.find_element_by_xpath(Xpath)
+        return(element)
+
 
     def byClass(self, byClass, element=driver):
         try:
