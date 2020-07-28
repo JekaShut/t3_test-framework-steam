@@ -27,10 +27,12 @@ class TestDiscountCalc:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         ActionPage.ActionPage().navigateToTopSelling()
-        gamesPrice = ActionPage.ActionPage().findLowestDiscount()
-        gamePrice = GamePage.GamePage().getPrices()
-        assert gamePrice == gamesPrice + " USD", "Prices are not equal"
-        pass
+        gamesData = ActionPage.ActionPage().findLowestDiscount()
+        gameData = GamePage.GamePage().getPrices()
+        assert gamesData[0] == gameData[0], "Prices are not equal"
+        assert gamesData[1] == gameData[1], "Prices are not equal"
+        assert gamesData[2] + " USD" == gameData[2], "Prices are not equal"
+
 
 
 

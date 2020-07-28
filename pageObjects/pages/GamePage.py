@@ -8,9 +8,15 @@ from framework.BaseElement import *
 
 class GamePage:
     def __init__(self):
+        self.WaitTime = 10
         self.discountPriceOnPageXpath = "//div[@class='game_area_purchase_game_wrapper']/div/div/div/div/div/div[@class='discount_final_price']"
+        self.PriceOnPageXpath = "//div[@class='game_area_purchase_game_wrapper']/div/div/div/div/div/div[@class='discount_original_price']"
+        self.DiscountXpath = "//div[@class='game_area_purchase_game_wrapper']/div/div/div/div/div[@class='discount_pct']"
 
     def getPrices(self):
-        time.sleep(2)
-        gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
-        return(gamePagePrice)
+        Wait.WaitXpath(self.DiscountXpath, self.WaitTime)
+        gamePageDiscount = ElementOperations.findOneElement.byXpath(self, self.DiscountXpath).text
+        gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.PriceOnPageXpath).text
+        gamePageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
+        gameData = [gamePageDiscount, gamePagePrice, gamePageDiscountPrice]
+        return(gameData)
