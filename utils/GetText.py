@@ -1,7 +1,8 @@
 from framework.BaseElement import *
 
 
-class GetTextXpath:
-    def __init__(self, Xpath):
+class GetText:
+
+    def byXpath(self, Xpath):
         element = driver.find_element_by_xpath(Xpath)
         return(element.text)
