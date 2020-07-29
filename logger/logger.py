@@ -4,14 +4,19 @@ import time
 from common import jsonGetter
 
 DIR = jsonGetter.GetJson.get("DIR")
+BROWSER = jsonGetter.GetJson.get("actualBrowser")
 
 
 class Logger:
     def __init__(self, logger):
         self.logger = logging.getLogger(logger)
         self.logger.setLevel(logging.DEBUG)
+        if os.path.exists("logs"):
+            pass
+        else:
+            os.mkdir("logs")
 
-        log_time = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+        log_time = time.strftime(BROWSER + '-%Y-%m-%d-%H%M-%S', time.localtime(time.time()))
         log_path = os.getcwd() + "/logs/"
         log_name = log_path + log_time + '.log'
 

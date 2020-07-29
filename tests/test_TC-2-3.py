@@ -7,6 +7,9 @@ from pageObjects.SystemAsserts import fileIsDownloaded
 
 from framework.BaseElement import *
 from selenium.webdriver.common.action_chains import ActionChains
+from logger.logger import Logger
+
+logger = Logger(logger="TC-2").getlog()
 
 LOCAL = jsonGetter.GetJson.get("LOCAL")
 SITE = jsonGetter.GetJson.get("SITE")
@@ -28,7 +31,7 @@ class TestC_2:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         GameTypePage.ActionPage().navigateToTopSelling()
-        gamesData = GameTypePage.ActionPage().findHigestDiscount()
+        gamesData = GameTypePage.ActionPage().findHighestDiscount()
         gameData = GamePage.GamePage().getPrices()
         assert gamesData[0] == gameData[0], "Prices are not equal"
         assert gamesData[1] == gameData[1], "Prices are not equal"
@@ -37,7 +40,7 @@ class TestC_2:
 class TestC_3:
     def test_discountCalcLow(self):
         LinkOperations.OpenLink(SITE)
-        MainPage.MainPage().moveMouseToMenu()
+        MainPage.MainPage().moveMouseToMenu() # FireFoxBUG idk
         MainPage.MainPage().clickIndie()
         GameTypePage.ActionPage().navigateToTopSelling()
         gamesData = GameTypePage.ActionPage().findLowestDiscount()
