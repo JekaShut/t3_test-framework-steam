@@ -20,7 +20,3 @@ class TestRunbrowser():
         MainPage.MainPage().setLang()
 
 
-#class TestStopTests:
-#    def test_TearDown(self):
-#        time.sleep(2)
-#        StopBrowser.stop()

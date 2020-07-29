@@ -19,6 +19,7 @@ class MainPage:
         self.MainLogoXpath = '//div[@id["global_header"]]/div/div[@class["logo"]]/span[@id["logo_holder"]]'
         self.menuXpath = "//*[@id='genre_tab']/span/a[1]"
         self.actionXpath = "//*[@id='genre_flyout']/div/div[2]/a[1]"
+        self.indieXpath = "//*[@id='genre_flyout']/div/div[2]/a[2]"
 
 
     def setLang(self):
@@ -39,6 +40,10 @@ class MainPage:
     def clickAction(self):
         Wait.WaitXpath(self.actionXpath, self.WaitTime)
         ButtonOperations.ClickButtonXpath(self.actionXpath)
+
+    def clickIndie(self):
+        Wait.WaitXpath(self.indieXpath, self.WaitTime)
+        ButtonOperations.ClickButtonXpath(self.indieXpath)
 
 
 

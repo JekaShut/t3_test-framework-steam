@@ -14,7 +14,7 @@ class ActionPage:
         self.gamesXpath = "//*[@id='TopSellersRows']/a"
         self.discountClass = "discount_pct"
         self.topSellRowXpath = "//*[@id='TopSellersRows']"
-        self.discountXpath = "/a/div/div[@class='discount_pct']"
+        self.discountXpath = "a/div/div[@class='discount_pct']"
         self.originalPriceXpath = "../div/div[@class='discount_original_price']"
         self.discountPriceXpath = "../div/div[@class='discount_final_price']"
         self.lastGameXpath = "//*[@id='NewReleasesRows']/a[15]"
@@ -27,11 +27,9 @@ class ActionPage:
         ButtonOperations.ClickButtonXpath(self.topSellXpath)
 
     def findLowestDiscount(self):
-        Wait.WaitXpath(self.pageXpath, self.WaitTime)
-        ButtonOperations.ClickButtonXpath(self.pageXpath)
         Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
         topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
-        discountElems = ElementOperations.findManyElements.byClass(self, self.discountClass, topSellRow)
+        discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
         gamesPageDiscount = sortedDisc[0][1]                                                                                            # %
         gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[0][0]).text                 # WithoutDiscount
@@ -40,7 +38,17 @@ class ActionPage:
         sortedDisc[0][0].click()
         return(data)
 
-
+    def findHigestDiscount(self):
+        Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
+        topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
+        discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
+        sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
+        gamesPageDiscount = sortedDisc[-1][1]                                                                                            # %
+        gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[-1][0]).text                 # WithoutDiscount
+        gamesPageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[-1][0]).text         # WithDiscount
+        data = [gamesPageDiscount, gamesPagePrice, gamesPageDiscountPrice]
+        sortedDisc[-1][0].click()
+        return(data)
         #ADD RATED CONTENT BANNER
 
 
