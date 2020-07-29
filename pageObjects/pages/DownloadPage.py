@@ -2,7 +2,7 @@ from framework import BaseElement
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations
 from logger.logger import Logger
 
-logger = Logger(logger="BaseTest").getlog()
+logger = Logger(logger="DownloadPage").getlog()
 
 class DownloadPage:
     def __init__(self):

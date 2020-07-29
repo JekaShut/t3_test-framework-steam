@@ -6,7 +6,7 @@ from pageObjects.pages.Logic import  ActionPageLogic
 from framework.BaseElement import *
 from logger.logger import Logger
 
-logger = Logger(logger="BaseTest").getlog()
+logger = Logger(logger="GamePage").getlog()
 
 class GamePage:
     def __init__(self):

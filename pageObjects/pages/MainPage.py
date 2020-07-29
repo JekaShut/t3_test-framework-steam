@@ -4,7 +4,7 @@ from common import jsonGetter
 import time
 from logger.logger import Logger
 
-logger = Logger(logger="BaseTest").getlog()
+logger = Logger(logger="MainPage").getlog()
 
 
 LOCAL = jsonGetter.GetJson.get("LOCAL")
