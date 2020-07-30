@@ -15,6 +15,7 @@ SITE = jsonGetter.GetJson.getConfig("SITE")
 class TestSteamDownload:
 
     def test_steampageload(self):
+        logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
         assert SITE == GetUrl.Get().CurrentUrl()
         MainPage.MainPage().clickButtonToDownload()

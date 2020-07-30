@@ -49,6 +49,7 @@ class TestC_2:
 
 class TestC_3:
     def test_discountCalcLow(self):
+        logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
         MainPage.MainPage().moveMouseToMenu() # FireFoxBUG idk
         MainPage.MainPage().clickIndie()
