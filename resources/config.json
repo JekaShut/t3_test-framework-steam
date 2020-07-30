@@ -1,5 +1,5 @@
 {
-  "actualBrowser": "ChromeBrowser",
+  "actualBrowser": "FireFoxBrowser",
   "SITE": "https://store.steampowered.com/",
   "DIR": "D:\\[A1QA]\\TEMP",
   "LOCAL": "en"
