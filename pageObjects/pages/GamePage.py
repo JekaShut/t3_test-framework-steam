@@ -18,6 +18,7 @@ class GamePage:
         self.RatedYearSelect = "//*[@id='ageYear']"
         self.RatedYearOption = "//*[@id='ageYear']/option[@value='2001']"
         self.RatedConfirmButton = "//*[@id='app_agegate']/div/div[@class='agegate_text_container btns']/a"
+        self.RatedContentBlock = "//*[@id='app_agegate']/div[1]"
 
     def getPrices(self):
         logger.info("Waiting for the DOM to load the class")
@@ -40,13 +41,14 @@ class GamePage:
         try:
             logger.info("Found rated banner. Trying to resolve it")
             try:
-                Wait.WaitXpath(self.RatedContentText, self.WaitTime)
+                Wait.WaitXpath(self.RatedYearSelect, self.WaitTime)
             except TimeoutException:
                 logger.error("Cannot found element: " + self.RatedContentText)
-            # bannertext = GetText.GetText().byXpath(self.RatedContentText)
-            Wait.WaitXpath(self.RatedYearSelect, self.RatedContentText)
+            logger.info("Click selectYear dropbar")
             ButtonOperations.ClickButtonXpath(self.RatedYearSelect)
+            logger.info("Click 2001 year")
             ButtonOperations.ClickButtonXpath(self.RatedYearOption)
+            logger.info("Click View Page button")
             ButtonOperations.ClickButtonXpath(self.RatedConfirmButton)
 
 
