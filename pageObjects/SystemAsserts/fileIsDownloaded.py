@@ -6,7 +6,7 @@ import os
 class fileIsDownloaded:
     def __init__(self):
         self.sleepTime = 2
-        self.DIR = jsonGetter.GetJson.get("DIR")
+        self.DIR = jsonGetter.GetJson.getConfig("DIR")
         self.file = "SteamSetup.exe"
 
     def checkFile(self):

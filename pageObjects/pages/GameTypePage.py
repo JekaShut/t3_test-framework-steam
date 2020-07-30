@@ -12,6 +12,7 @@ class ActionPage:
     def __init__(self):
         self.WaitTime = 10
         self.actionTitleXpath = "//h2[@class='pageheader']"
+        self.TitleXpath = "//h2[@class='pageheader']"
         self.topSellXpath = "//*[@id='tab_select_TopSellers']/div"
         self.pageXpath = "//*[@id='TopSellers_links']/span[2]"
         self.gamesXpath = "//*[@id='TopSellersRows']/a"
@@ -20,6 +21,7 @@ class ActionPage:
         self.discountXpath = "a/div/div[@class='discount_pct']"
         self.originalPriceXpath = "../div/div[@class='discount_original_price']"
         self.discountPriceXpath = "../div/div[@class='discount_final_price']"
+        self.GameName = "../../div/div[@class='tab_item_name']"
         self.lastGameXpath = "//*[@id='NewReleasesRows']/a[15]"
 
 
@@ -42,7 +44,8 @@ class ActionPage:
         gamesPageDiscount = sortedDisc[0][1]                                                                                            # %
         gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[0][0]).text                 # WithoutDiscount
         gamesPageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[0][0]).text         # WithDiscount
-        data = [gamesPageDiscount, gamesPagePrice, gamesPageDiscountPrice]
+        gameName = ElementOperations.findOneElement.byXpath(self, self.GameName, sortedDisc[0][0]).text
+        data = [gamesPageDiscount, gamesPagePrice, gamesPageDiscountPrice, gameName]
         logger.info("Getting data: " + ", ".join(data))
         logger.info("Trying to click game button with lowest discount")
         sortedDisc[0][0].click()
@@ -59,7 +62,8 @@ class ActionPage:
         gamesPageDiscount = sortedDisc[-1][1]                                                                                            # %
         gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[-1][0]).text                 # WithoutDiscount
         gamesPageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[-1][0]).text         # WithDiscount
-        data = [gamesPageDiscount, gamesPagePrice, gamesPageDiscountPrice]
+        gameName = ElementOperations.findOneElement.byXpath(self, self.GameName, sortedDisc[0][0]).text
+        data = [gamesPageDiscount, gamesPagePrice, gamesPageDiscountPrice, gameName]
         logger.info("Getting data: " + ", ".join(data))
         logger.info("Trying to click game button with highest discount")
         sortedDisc[-1][0].click()

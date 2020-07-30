@@ -7,11 +7,11 @@ from logger.logger import Logger
 logger = Logger(logger="MainPage").getlog()
 
 
-LOCAL = jsonGetter.GetJson.get("LOCAL")
-SITE = jsonGetter.GetJson.get("SITE")
-actualBrowser = jsonGetter.GetJson.get("actualBrowser")
-EnglishName = "English (английский)"
-RussianName = "Русский (Russian)"
+LOCAL = jsonGetter.GetJson.getConfig("LOCAL")
+SITE = jsonGetter.GetJson.getConfig("SITE")
+actualBrowser = jsonGetter.GetJson.getConfig("actualBrowser")
+EnglishName = jsonGetter.GetJson.getData("enText")
+RussianName = jsonGetter.GetJson.getData("ruText")
 
 class MainPage:
     def __init__(self):
@@ -32,13 +32,15 @@ class MainPage:
         if LOCAL == "en":
             logger.info("LOCAL IS ENGLISH. Trying to set it")
             logger.info("Click to button: " + EnglishName)
-
             ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, EnglishName)
+            Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+
 
         if LOCAL == "ru":
             logger.info("LOCAL IS RUSSIAN. Trying to set it")
             logger.info("Click to button: " + RussianName)
             ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, RussianName)
+            Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
 
 
     def clickButtonToDownload(self):
@@ -49,6 +51,7 @@ class MainPage:
 
     def moveMouseToMenu(self):
         logger.info("Trying to move mouse to menu")
+        Wait.WaitXpath(self.menuXpath, self.WaitTime)
         MouseOperations.MoveMouseXpath(self.menuXpath)
 
     def clickAction(self):

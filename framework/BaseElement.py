@@ -11,7 +11,7 @@ BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
 
 class ChromeBrowser():
     def runBrowser(self):
-        DIR = jsonGetter.GetJson.get("DIR")
+        DIR = jsonGetter.GetJson.getConfig("DIR")
         preferences = {"download.default_directory": DIR, "safebrowsing.enabled": "false"}
 
         options = webdriver.ChromeOptions()
@@ -24,7 +24,7 @@ class ChromeBrowser():
 
 class FireFoxBrowser():
     def runBrowser(self):
-        DIR = jsonGetter.GetJson.get("DIR")
+        DIR = jsonGetter.GetJson.getConfig("DIR")
         fp = webdriver.FirefoxProfile()
         fp.set_preference("browser.download.folderList", 2)
         fp.set_preference("browser.download.dir", DIR)
@@ -68,7 +68,7 @@ class BrowserFactory(metaclass=Singleton):
 
 class RunBrowser(metaclass=Singleton):
     def __init__(self, actualBrowser="ChromeBrowser"):
-        actualBrowser = jsonGetter.GetJson.get("actualBrowser")
+        actualBrowser = jsonGetter.GetJson.getConfig("actualBrowser")
         if actualBrowser in BROWSERS:
             BROWSERindex = BROWSERS.index(actualBrowser)
             self.driver = BrowserFactory.getBrowser(BROWSERindex)

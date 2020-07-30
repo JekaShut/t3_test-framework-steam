@@ -3,8 +3,8 @@ import os
 import time
 from common import jsonGetter
 
-DIR = jsonGetter.GetJson.get("DIR")
-BROWSER = jsonGetter.GetJson.get("actualBrowser")
+DIR = jsonGetter.GetJson.getConfig("DIR")
+BROWSER = jsonGetter.GetJson.getConfig("actualBrowser")
 
 
 class Logger:
