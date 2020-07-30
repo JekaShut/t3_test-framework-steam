@@ -10,7 +10,6 @@ class fileIsDownloaded:
         self.file = "SteamSetup.exe"
 
     def checkFile(self):
-        time.sleep(self.sleepTime)
         directory = os.listdir(self.DIR)
         for file in directory:
                 if file == self.file:

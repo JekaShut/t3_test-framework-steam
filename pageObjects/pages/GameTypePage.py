@@ -46,7 +46,10 @@ class ActionPage:
         discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         logger.info("Trying to sort elements from low to hight")
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
-        gamesPageDiscount = sortedDisc[0][1]                                                                                            # %
+        try:
+            gamesPageDiscount = sortedDisc[0][1]                                                                                            # %
+        except:
+            logger.error("No games with any discount")
         gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[0][0]).text                 # WithoutDiscount
         gamesPageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[0][0]).text         # WithDiscount
         gameName = ElementOperations.findOneElement.byXpath(self, self.GameName, sortedDisc[0][0]).text
@@ -64,7 +67,10 @@ class ActionPage:
         discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         logger.info("Trying to sort elements from low to hight")
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
-        gamesPageDiscount = sortedDisc[-1][1]                                                                                            # %
+        try:
+            gamesPageDiscount = sortedDisc[-1][1]                                                                                            # %
+        except:
+            logger.error("No games with any discount")
         gamesPagePrice = ElementOperations.findOneElement.byXpath(self, self.originalPriceXpath, sortedDisc[-1][0]).text                 # WithoutDiscount
         gamesPageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceXpath, sortedDisc[-1][0]).text         # WithDiscount
         gameName = ElementOperations.findOneElement.byXpath(self, self.GameName, sortedDisc[0][0]).text
