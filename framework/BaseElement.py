@@ -3,7 +3,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from common import jsonGetter
+from logger.logger import Logger
+
+logger = Logger(logger="BaseElement").getlog()
 
 
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
@@ -11,6 +15,7 @@ BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
 
 class ChromeBrowser():
     def runBrowser(self):
+        logger.info("Trying to run Chrome Browser")
         DIR = jsonGetter.GetJson.getConfig("DIR")
         preferences = {"download.default_directory": DIR, "safebrowsing.enabled": "false"}
 
@@ -18,12 +23,14 @@ class ChromeBrowser():
         options.add_experimental_option("prefs", preferences)
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         driver.set_page_load_timeout(10)
+        logger.info("Trying to maximize browser window")
         driver.maximize_window()
         return(driver)
 
 
 class FireFoxBrowser():
     def runBrowser(self):
+        logger.info("Trying to run FireFox Browser")
         DIR = jsonGetter.GetJson.getConfig("DIR")
         fp = webdriver.FirefoxProfile()
         fp.set_preference("browser.download.folderList", 2)
@@ -34,6 +41,7 @@ class FireFoxBrowser():
 
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), firefox_profile=fp)
         driver.maximize_window()
+        logger.info("Trying to maximize browser window")
         return(driver)
 
 

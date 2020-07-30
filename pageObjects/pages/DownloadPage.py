@@ -1,4 +1,4 @@
-from framework import BaseElement
+from framework.BaseElement import *
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations
 from logger.logger import Logger
 
@@ -11,6 +11,9 @@ class DownloadPage:
 
     def clickButtonToDownload(self):
         logger.info("Waiting for the DOM to load the class")
-        Wait.WaitClass(self.downloadButtonClass, self.waitTime)
+        try:
+            Wait.WaitClass(self.downloadButtonClass, self.waitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.downloadButtonClass)
         logger.info("Trying to click button with class: " + self.downloadButtonClass)
         ButtonOperations.ClickButtonClass(self.downloadButtonClass)

@@ -1,4 +1,3 @@
-from framework import BaseElement
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
 import time
@@ -18,11 +17,17 @@ class GamePage:
 
     def getPrices(self):
         logger.info("Waiting for the DOM to load the class")
-        Wait.WaitXpath(self.DiscountXpath, self.WaitTime)
-        gamePageDiscount = ElementOperations.findOneElement.byXpath(self, self.DiscountXpath).text
-        gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.PriceOnPageXpath).text
-        gamePageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
-        gamePageName = ElementOperations.findOneElement.byXpath(self, self.GameName).text
+        try:
+            Wait.WaitXpath(self.DiscountXpath, self.WaitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.DiscountXpath)
+        try:
+            gamePageDiscount = ElementOperations.findOneElement.byXpath(self, self.DiscountXpath).text
+            gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.PriceOnPageXpath).text
+            gamePageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
+            gamePageName = ElementOperations.findOneElement.byXpath(self, self.GameName).text
+        except NoSuchElementException:
+            logger.error("Cannot find one of elements!")
         gameData = [gamePageDiscount, gamePagePrice, gamePageDiscountPrice, gamePageName]
         logger.info("Getting element data from the page: " + ", ".join(gameData))
         return(gameData)

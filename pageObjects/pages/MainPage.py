@@ -1,4 +1,4 @@
-from framework import BaseElement
+from framework.BaseElement import *
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
 import time
@@ -28,30 +28,45 @@ class MainPage:
     def setLang(self):
         logger.info("TRYING TO SET LANG")
         logger.info("Trying to click language dropdown button")
-        ButtonOperations.ClickButtonXpath(self.DropDownXpath)
+        try:
+            ButtonOperations.ClickButtonXpath(self.DropDownXpath)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.DropDownXpath)
+
         if LOCAL == "en":
             logger.info("LOCAL IS ENGLISH. Trying to set it")
             logger.info("Click to button: " + EnglishName)
-            ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, EnglishName)
-            Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+            try:
+                ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, EnglishName)
+                Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+            except TimeoutException:
+                logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
 
 
         if LOCAL == "ru":
             logger.info("LOCAL IS RUSSIAN. Trying to set it")
             logger.info("Click to button: " + RussianName)
-            ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, RussianName)
-            Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
-
+            try:
+                ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, RussianName)
+                Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+            except TimeoutException:
+                logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
 
     def clickButtonToDownload(self):
         logger.info("Waiting for the DOM to load the class")
-        Wait.WaitXpath(self.MainLogoXpath, self.WaitTime)
+        try:
+            Wait.WaitXpath(self.MainLogoXpath, self.WaitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.MainLogoXpath)
         logger.info("Trying to click download button")
         ButtonOperations.ClickButtonClass(self.DownloadButtonClass)
 
     def moveMouseToMenu(self):
         logger.info("Trying to move mouse to menu")
-        Wait.WaitXpath(self.menuXpath, self.WaitTime)
+        try:
+            Wait.WaitXpath(self.menuXpath, self.WaitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.menuXpath)
         MouseOperations.MoveMouseXpath(self.menuXpath)
 
     def clickAction(self):

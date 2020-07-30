@@ -1,4 +1,3 @@
-from framework import BaseElement
 from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
 import time
@@ -29,14 +28,20 @@ class ActionPage:
 
     def navigateToTopSelling(self):
         logger.info("Waiting for the DOM to load the class")
-        Wait.WaitXpath(self.actionTitleXpath, self.WaitTime)
+        try:
+            Wait.WaitXpath(self.actionTitleXpath, self.WaitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.actionTitleXpath)
         logger.info("Trying to click element: " + self.topSellXpath)
         ButtonOperations.ClickButtonXpath(self.topSellXpath)
 
 
     def findLowestDiscount(self):
         logger.info("Waiting for the DOM to load the class")
-        Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
+        try:
+            Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
+        except TimeoutException:
+            logger.error("Cannot find element! " + self.topSellRowXpath)
         topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
         discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         logger.info("Trying to sort elements from low to hight")
