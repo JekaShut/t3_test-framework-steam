@@ -41,6 +41,10 @@ class TestC_2:
             assert TITLE == actionTitleEn
         GameTypePage.ActionPage().navigateToTopSelling()
         gamesData = GameTypePage.ActionPage().findHighestDiscount()
+        ####
+        # /тут должна быть проверка проверки возраста / #
+        GamePage.GamePage().checkRatedContent()
+        ###
         gameData = GamePage.GamePage().getPrices()
         assert gamesData[3] == gameData[3], "App name not equal"
         assert gamesData[0] == gameData[0], "Prices are not equal"
@@ -60,6 +64,10 @@ class TestC_3:
             assert TITLE == indieTitleEn
         GameTypePage.ActionPage().navigateToTopSelling()
         gamesData = GameTypePage.ActionPage().findLowestDiscount()
+        ####
+        # /тут должна быть проверка проверки возраста / #
+        GamePage.GamePage().checkRatedContent()
+        ###
         gameData = GamePage.GamePage().getPrices()
         assert gamesData[0] == gameData[0], "Prices are not equal"
         assert gamesData[1] == gameData[1], "Prices are not equal"

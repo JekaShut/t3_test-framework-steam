@@ -5,6 +5,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from common import jsonGetter
+
 #from logger.logger import Logger
 
 #logger = Logger(logger="TC-quit").getlog()
