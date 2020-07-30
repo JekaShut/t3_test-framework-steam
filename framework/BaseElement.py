@@ -10,14 +10,15 @@ from common import jsonGetter
 
 
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
-
+LOCAL = jsonGetter.GetJson.getConfig("LOCAL")
 
 class ChromeBrowser():
-    def runBrowser(self):
+    def runBrowser(self, locale="en"):
         DIR = jsonGetter.GetJson.getConfig("DIR")
         preferences = {"download.default_directory": DIR, "safebrowsing.enabled": "false"}
 
         options = webdriver.ChromeOptions()
+        options.add_argument("--lang={}".format(locale))
         options.add_experimental_option("prefs", preferences)
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         driver.set_page_load_timeout(10)
@@ -26,9 +27,10 @@ class ChromeBrowser():
 
 
 class FireFoxBrowser():
-    def runBrowser(self):
+    def runBrowser(self, locale="en"):
         DIR = jsonGetter.GetJson.getConfig("DIR")
         fp = webdriver.FirefoxProfile()
+        fp.set_preference("intl.accept_languages", locale)
         fp.set_preference("browser.download.folderList", 2)
         fp.set_preference("browser.download.dir", DIR)
         fp.set_preference("browser.download.manager.showWhenStarting", False)
@@ -55,12 +57,12 @@ class BrowserFactory(metaclass=Singleton):
 
         try:
             if browsertype == BROWSERS.index("FireFoxBrowser"):
-                driver = FireFoxBrowser().runBrowser()
+                driver = FireFoxBrowser().runBrowser(LOCAL)
                 # driver.set_window_size(get.resolutionH, get.resolutionW)
                 # driver.maximize_window()
                 return (driver)
             elif browsertype == BROWSERS.index("ChromeBrowser"):
-                driver = ChromeBrowser().runBrowser()
+                driver = ChromeBrowser().runBrowser(LOCAL)
                 # driver.set_window_size(get.resolutionH, get.resolutionW)
                 # driver.maximize_window()
 

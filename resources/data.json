@@ -1,8 +1,11 @@
 {
+  "ru": "ru",
   "ruLang": "язык",
   "ruText": "Русский (Russian)",
   "ruActionTitle": "Просмотр по метке «Гонки»",
   "ruIndieTitle": "Просмотр по метке «Инди»",
+
+  "en": "en",
   "enLang": "language",
   "enText": "English (английский)",
   "enActionTitle": "Browsing Action",

@@ -21,9 +21,9 @@ class TestRunbrowser():
         logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
 
-    def test_lang(self):
-        assert SITE == GetUrl.Get().CurrentUrl()
-        logger.info("Trying to set language")
-        MainPage.MainPage().setLang()
-        #language = GetText.GetText().byXpath(MainPage.MainPage().DropDownXpath)
+    #def test_lang(self):
+    #    assert SITE == GetUrl.Get().CurrentUrl()
+    #    logger.info("Trying to set language")
+    #    MainPage.MainPage().setLang()
+    #    #language = GetText.GetText().byXpath(MainPage.MainPage().DropDownXpath)
 

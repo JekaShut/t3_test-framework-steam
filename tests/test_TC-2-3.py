@@ -14,6 +14,8 @@ actionTitleRu = jsonGetter.GetJson.getData("ruActionTitle")
 actionTitleEn = jsonGetter.GetJson.getData("enActionTitle")
 indieTitleRu = jsonGetter.GetJson.getData("ruIndieTitle")
 indieTitleEn = jsonGetter.GetJson.getData("enIndieTitle")
+ru = jsonGetter.GetJson.getData("ru")
+en = jsonGetter.GetJson.getData("en")
 
 
 class TestRunbrowser():
@@ -32,9 +34,9 @@ class TestC_2:
         MainPage.MainPage().moveMouseToMenu()
         MainPage.MainPage().clickAction()
         TITLE = GetText.GetText().byXpath(GameTypePage.ActionPage().TitleXpath)
-        if LOCAL == "ru":
+        if LOCAL == ru:
             assert TITLE == actionTitleRu
-        if LOCAL == "en":
+        if LOCAL == en:
             assert TITLE == actionTitleEn
         GameTypePage.ActionPage().navigateToTopSelling()
         gamesData = GameTypePage.ActionPage().findHighestDiscount()

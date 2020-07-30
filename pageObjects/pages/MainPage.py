@@ -10,6 +10,8 @@ SITE = jsonGetter.GetJson.getConfig("SITE")
 actualBrowser = jsonGetter.GetJson.getConfig("actualBrowser")
 EnglishName = jsonGetter.GetJson.getData("enText")
 RussianName = jsonGetter.GetJson.getData("ruText")
+ru = jsonGetter.GetJson.getData("ru")
+en = jsonGetter.GetJson.getData("en")
 
 
 class MainPage:
@@ -31,7 +33,7 @@ class MainPage:
         except TimeoutException:
             logger.error("Cannot find element! " + self.DropDownXpath)
 
-        if LOCAL == "en":
+        if LOCAL == en:
             logger.info("LOCAL IS ENGLISH. Trying to set it")
 
             try:
@@ -41,7 +43,7 @@ class MainPage:
             except TimeoutException:
                 logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
 
-        if LOCAL == "ru":
+        if LOCAL == ru:
             logger.info("LOCAL IS RUSSIAN. Trying to set it")
             try:
                 logger.info("Click to button: " + RussianName)
