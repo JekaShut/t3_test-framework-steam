@@ -22,7 +22,7 @@ logger.info("\n" + "Browser : " + actualBrowser + "\n" + "Language is: " + LOCAL
 
 class TestRunbrowser():
     def test_runbrowser(self):
-        BaseElement.RunBrowser(actualBrowser)
+        #BaseElement.RunBrowser(actualBrowser)
         LinkOperations.OpenLink(SITE)
 
 
