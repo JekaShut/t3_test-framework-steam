@@ -26,6 +26,7 @@ class TestRunbrowser():
 
 class TestC_2:
     def test_discountCalcHight(self):
+        logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
         assert SITE == GetUrl.Get().CurrentUrl()
         MainPage.MainPage().moveMouseToMenu()
@@ -52,6 +53,7 @@ class TestC_3:
     def test_discountCalcLow(self):
         logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
+        assert SITE == GetUrl.Get().CurrentUrl()
         MainPage.MainPage().moveMouseToMenu()  # FireFoxBUG idk
         MainPage.MainPage().clickIndie()
         TITLE = GetText.GetText().byXpath(GameTypePage.ActionPage().TitleXpath)
@@ -66,6 +68,7 @@ class TestC_3:
         GamePage.GamePage().checkRatedContent()
         ###
         gameData = GamePage.GamePage().getPrices()
+        assert gamesData[3] == gameData[3], "App name not equal"
         assert gamesData[0] == gameData[0], "Prices are not equal"
         assert gamesData[1] == gameData[1], "Prices are not equal"
         assert gamesData[2] + " USD" == gameData[2], "Prices are not equal"
