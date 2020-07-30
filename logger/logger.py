@@ -1,6 +1,7 @@
 import logging
 import os
 import time
+
 from common import jsonGetter
 
 DIR = jsonGetter.GetJson.getConfig("DIR")
@@ -35,7 +36,5 @@ class Logger:
 
     def getlog(self):
         return self.logger
-
-
 
 # шаги теста, действия над элементами, работа со страницами, формами, действия с браузерами, исключения

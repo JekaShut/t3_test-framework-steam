@@ -1,6 +1,6 @@
-from common import jsonGetter
-import time
 import os
+
+from common import jsonGetter
 
 
 class fileIsDownloaded:
@@ -12,6 +12,6 @@ class fileIsDownloaded:
     def checkFile(self):
         directory = os.listdir(self.DIR)
         for file in directory:
-                if file == self.file:
-                    installed = True
-        return(installed)
+            if file == self.file:
+                installed = True
+        return (installed)

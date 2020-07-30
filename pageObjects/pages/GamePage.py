@@ -1,11 +1,9 @@
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
-from common import jsonGetter
-import time
-from pageObjects.pages.Logic import  ActionPageLogic
-from framework.BaseElement import *
 from logger.logger import Logger
+from utils import ButtonOperations, Wait, ElementOperations
+from framework.BaseElement import TimeoutException, NoSuchElementException
 
 logger = Logger(logger="GamePage").getlog()
+
 
 class GamePage:
     def __init__(self):
@@ -35,15 +33,11 @@ class GamePage:
             logger.error("Cannot find one of elements!")
         gameData = [gamePageDiscount, gamePagePrice, gamePageDiscountPrice, gamePageName]
         logger.info("Getting element data from the page: " + ", ".join(gameData))
-        return(gameData)
+        return (gameData)
 
     def checkRatedContent(self):
         try:
             logger.info("Found rated banner. Trying to resolve it")
-            try:
-                Wait.WaitXpath(self.RatedYearSelect, self.WaitTime)
-            except TimeoutException:
-                logger.error("Cannot found element: " + self.RatedContentText)
             logger.info("Click selectYear dropbar")
             ButtonOperations.ClickButtonXpath(self.RatedYearSelect)
             logger.info("Click 2001 year")
@@ -55,4 +49,3 @@ class GamePage:
         except NoSuchElementException:
             logger.info("No rated content banner found. Keeping forward")
             pass
-

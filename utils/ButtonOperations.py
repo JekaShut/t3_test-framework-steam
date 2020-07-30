@@ -1,5 +1,4 @@
 from framework.BaseElement import *
-import time
 
 
 class ClickButtonClass:

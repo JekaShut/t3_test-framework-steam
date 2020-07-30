@@ -1,17 +1,16 @@
-from framework.BaseElement import *
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, GetText, MouseOperations
 from common import jsonGetter
-import time
 from logger.logger import Logger
+from utils import ButtonOperations, Wait, MouseOperations
+from framework.BaseElement import TimeoutException, NoSuchElementException
 
 logger = Logger(logger="MainPage").getlog()
-
 
 LOCAL = jsonGetter.GetJson.getConfig("LOCAL")
 SITE = jsonGetter.GetJson.getConfig("SITE")
 actualBrowser = jsonGetter.GetJson.getConfig("actualBrowser")
 EnglishName = jsonGetter.GetJson.getData("enText")
 RussianName = jsonGetter.GetJson.getData("ruText")
+
 
 class MainPage:
     def __init__(self):
@@ -23,7 +22,6 @@ class MainPage:
         self.menuXpath = "//*[@id='genre_tab']/span/a[1]"
         self.actionXpath = "//*[@id='genre_flyout']/div/div[2]/a[1]"
         self.indieXpath = "//*[@id='genre_flyout']/div/div[2]/a[2]"
-
 
     def setLang(self):
         logger.info("TRYING TO SET LANG")
@@ -41,7 +39,6 @@ class MainPage:
                 Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
             except TimeoutException:
                 logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
-
 
         if LOCAL == "ru":
             logger.info("LOCAL IS RUSSIAN. Trying to set it")
@@ -80,7 +77,3 @@ class MainPage:
         Wait.WaitXpath(self.indieXpath, self.WaitTime)
         logger.info("Trying to click Indie button")
         ButtonOperations.ClickButtonXpath(self.indieXpath)
-
-
-
-

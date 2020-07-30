@@ -1,8 +1,9 @@
-from framework.BaseElement import *
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations
 from logger.logger import Logger
+from utils import ButtonOperations, Wait
+from framework.BaseElement import TimeoutException, NoSuchElementException
 
 logger = Logger(logger="DownloadPage").getlog()
+
 
 class DownloadPage:
     def __init__(self):

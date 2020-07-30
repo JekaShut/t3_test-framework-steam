@@ -1,7 +1,8 @@
-from framework.BaseElement import *
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+from framework.BaseElement import *
 
 
 class WaitClass:
@@ -14,6 +15,7 @@ class WaitXpath:
     def __init__(self, Xpath, time):
         wait = WebDriverWait(driver, time)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, Xpath)))
+
 
 class WaitXpathLocated:
     def __init__(self, Xpath, time):

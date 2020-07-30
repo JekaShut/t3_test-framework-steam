@@ -1,15 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from common import jsonGetter
 
-#from logger.logger import Logger
+# from logger.logger import Logger
 
-#logger = Logger(logger="TC-quit").getlog()
-
+# logger = Logger(logger="TC-quit").getlog()
 
 
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]
@@ -25,7 +22,7 @@ class ChromeBrowser():
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         driver.set_page_load_timeout(10)
         driver.maximize_window()
-        return(driver)
+        return (driver)
 
 
 class FireFoxBrowser():
@@ -40,27 +37,28 @@ class FireFoxBrowser():
 
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), firefox_profile=fp)
         driver.maximize_window()
-        return(driver)
+        return (driver)
 
 
 class Singleton(type):
     _instances = {}
+
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
-class BrowserFactory(metaclass=Singleton):        
+class BrowserFactory(metaclass=Singleton):
     @staticmethod
     def getBrowser(browsertype):
-        
+
         try:
             if browsertype == BROWSERS.index("FireFoxBrowser"):
                 driver = FireFoxBrowser().runBrowser()
                 # driver.set_window_size(get.resolutionH, get.resolutionW)
                 # driver.maximize_window()
-                return(driver)
+                return (driver)
             elif browsertype == BROWSERS.index("ChromeBrowser"):
                 driver = ChromeBrowser().runBrowser()
                 # driver.set_window_size(get.resolutionH, get.resolutionW)
@@ -82,6 +80,4 @@ class RunBrowser(metaclass=Singleton):
             raise Exception("Такого браузера нет!")
 
 
-
 driver = RunBrowser().driver
-

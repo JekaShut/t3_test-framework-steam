@@ -1,13 +1,9 @@
 from framework import BaseElement
-from common import jsonGetter
-from utils import LinkOperations, ButtonOperations, StopBrowser, Wait, ElementOperations, MouseOperations , GetUrl, GetText
-import time
-from pageObjects.pages import DownloadPage, MainPage, GameTypePage, GamePage
-from pageObjects.SystemAsserts import fileIsDownloaded
-
 from framework.BaseElement import *
-from selenium.webdriver.common.action_chains import ActionChains
 from logger.logger import Logger
+from pageObjects.pages import MainPage, GameTypePage, GamePage
+from utils import LinkOperations, GetUrl, \
+    GetText
 
 logger = Logger(logger="TC-2").getlog()
 
@@ -19,13 +15,13 @@ actionTitleEn = jsonGetter.GetJson.getData("enActionTitle")
 indieTitleRu = jsonGetter.GetJson.getData("ruIndieTitle")
 indieTitleEn = jsonGetter.GetJson.getData("enIndieTitle")
 
+
 class TestRunbrowser():
     def test_runbrowser(self):
         BaseElement.RunBrowser(actualBrowser)
 
-
-    #def test_lang(self):
-        #MainPage.MainPage().setLang()
+    # def test_lang(self):
+    # MainPage.MainPage().setLang()
 
 
 class TestC_2:
@@ -51,11 +47,12 @@ class TestC_2:
         assert gamesData[1] == gameData[1], "Prices are not equal"
         assert gamesData[2] + " USD" == gameData[2], "Prices are not equal"
 
+
 class TestC_3:
     def test_discountCalcLow(self):
         logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
-        MainPage.MainPage().moveMouseToMenu() # FireFoxBUG idk
+        MainPage.MainPage().moveMouseToMenu()  # FireFoxBUG idk
         MainPage.MainPage().clickIndie()
         TITLE = GetText.GetText().byXpath(GameTypePage.ActionPage().TitleXpath)
         if LOCAL == "ru":
@@ -72,10 +69,3 @@ class TestC_3:
         assert gamesData[0] == gameData[0], "Prices are not equal"
         assert gamesData[1] == gameData[1], "Prices are not equal"
         assert gamesData[2] + " USD" == gameData[2], "Prices are not equal"
-
-
-
-
-
-
-
