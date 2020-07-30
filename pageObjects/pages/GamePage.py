@@ -1,6 +1,7 @@
 from logger.logger import Logger
 from utils import ButtonOperations, Wait, ElementOperations
 from framework.BaseElement import TimeoutException, NoSuchElementException
+from framework.BaseElement import RunBrowser
 
 logger = Logger(logger="GamePage").getlog()
 
@@ -25,10 +26,10 @@ class GamePage:
         except TimeoutException:
             logger.error("Cannot find element! " + self.DiscountXpath)
         try:
-            gamePageDiscount = ElementOperations.findOneElement.byXpath(self, self.DiscountXpath).text
-            gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.PriceOnPageXpath).text
-            gamePageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath).text
-            gamePageName = ElementOperations.findOneElement.byXpath(self, self.GameName).text
+            gamePageDiscount = ElementOperations.findOneElement.byXpath(self, self.DiscountXpath, RunBrowser().driver).text
+            gamePagePrice = ElementOperations.findOneElement.byXpath(self, self.PriceOnPageXpath, RunBrowser().driver).text
+            gamePageDiscountPrice = ElementOperations.findOneElement.byXpath(self, self.discountPriceOnPageXpath, RunBrowser().driver).text
+            gamePageName = ElementOperations.findOneElement.byXpath(self, self.GameName, RunBrowser().driver).text
         except NoSuchElementException:
             logger.error("Cannot find one of elements!")
         gameData = [gamePageDiscount, gamePagePrice, gamePageDiscountPrice, gamePageName]

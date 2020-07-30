@@ -1,7 +1,7 @@
 from logger.logger import Logger
 from pageObjects.pages.Logic import ActionPageLogic
 from utils import ButtonOperations, Wait, ElementOperations
-from framework.BaseElement import TimeoutException, NoSuchElementException
+from framework.BaseElement import TimeoutException, NoSuchElementException, RunBrowser
 
 logger = Logger(logger="GameTypePage").getlog()
 
@@ -37,7 +37,7 @@ class ActionPage:
             Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
         except TimeoutException:
             logger.error("Cannot find element! " + self.topSellRowXpath)
-        topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
+        topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath, RunBrowser().driver)
         discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         logger.info("Trying to sort elements from low to hight")
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)
@@ -60,7 +60,8 @@ class ActionPage:
     def findHighestDiscount(self):
         logger.info("Waiting for the DOM to load the class")
         Wait.WaitXpath(self.topSellRowXpath, self.WaitTime)
-        topSellRow = ElementOperations.findOneElement.byXpath(self, self.topSellRowXpath)
+        #topSellRow = RunBrowser().driver.find_element_by_xpath(self.topSellRowXpath)
+        topSellRow = ElementOperations.findOneElement().byXpath(self.topSellRowXpath, RunBrowser().driver)
         discountElems = ElementOperations.findManyElements.byXpath(self, self.discountXpath, topSellRow)
         logger.info("Trying to sort elements from low to hight")
         sortedDisc = ActionPageLogic.SortDiscountElems().get(discountElems)

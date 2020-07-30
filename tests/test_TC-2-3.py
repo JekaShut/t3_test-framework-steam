@@ -3,7 +3,8 @@ from framework.BaseElement import *
 from logger.logger import Logger
 from pageObjects.pages import MainPage, GameTypePage, GamePage
 from utils import LinkOperations, GetUrl, \
-    GetText
+    GetText, StopBrowser
+import time
 
 logger = Logger(logger="TC-2").getlog()
 
@@ -18,15 +19,18 @@ ru = jsonGetter.GetJson.getData("ru")
 en = jsonGetter.GetJson.getData("en")
 
 
-class TestRunbrowser():
-    def test_runbrowser(self):
-        BaseElement.RunBrowser(actualBrowser)
+
 
     # def test_lang(self):
     # MainPage.MainPage().setLang()
 
 
 class TestC_2:
+    def test_runbrowser(self):
+        BaseElement.RunBrowser.clear()
+        BaseElement.RunBrowser(actualBrowser)
+        LinkOperations.OpenLink(SITE)
+
     def test_discountCalcHight(self):
         logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
@@ -50,8 +54,20 @@ class TestC_2:
         assert gamesData[1] == gameData[1], "Prices are not equal"
         assert gamesData[2] + " USD" == gameData[2], "Prices are not equal"
 
+    def test_TearDown(self):
+        time.sleep(2)
+        logger.info("Trying to stop browser")
+        StopBrowser.stop()
+
+
+
 
 class TestC_3:
+    def test_runbrowser(self):
+        BaseElement.RunBrowser.clear()
+        BaseElement.RunBrowser(actualBrowser)
+        LinkOperations.OpenLink(SITE)
+
     def test_discountCalcLow(self):
         logger.info("Trying to open url: " + SITE)
         LinkOperations.OpenLink(SITE)
