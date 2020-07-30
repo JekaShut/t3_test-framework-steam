@@ -33,19 +33,20 @@ class MainPage:
 
         if LOCAL == "en":
             logger.info("LOCAL IS ENGLISH. Trying to set it")
-            logger.info("Click to button: " + EnglishName)
+
             try:
+                logger.info("Click to button: " + EnglishName)
                 ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, EnglishName)
-                Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+                #Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
             except TimeoutException:
                 logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
 
         if LOCAL == "ru":
             logger.info("LOCAL IS RUSSIAN. Trying to set it")
-            logger.info("Click to button: " + RussianName)
             try:
+                logger.info("Click to button: " + RussianName)
                 ButtonOperations.ClickFromManyByXpathText(self.DropDownMenuButtonsXpath, RussianName)
-                Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
+                #Wait.WaitXpath(self.DropDownXpath, self.WaitTime)
             except TimeoutException:
                 logger.error("Cannot find element! " + self.DropDownMenuButtonsXpath)
 

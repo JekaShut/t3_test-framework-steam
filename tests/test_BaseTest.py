@@ -1,8 +1,8 @@
 from common import jsonGetter
-from common import jsonGetter
 from logger.logger import Logger
 from pageObjects.pages import MainPage
 from utils import LinkOperations, GetUrl, GetText
+import time
 
 logger = Logger(logger="BaseTest").getlog()
 
@@ -25,4 +25,5 @@ class TestRunbrowser():
         assert SITE == GetUrl.Get().CurrentUrl()
         logger.info("Trying to set language")
         MainPage.MainPage().setLang()
-        language = GetText.GetText().byXpath(MainPage.MainPage().DropDownXpath)
+        #language = GetText.GetText().byXpath(MainPage.MainPage().DropDownXpath)
+
